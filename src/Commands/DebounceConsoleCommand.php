@@ -5,7 +5,7 @@ namespace Zackaj\LaravelDebounce\Commands;
 use Illuminate\Console\Command;
 use Zackaj\LaravelDebounce\Debouncers\CommandDebouncer;
 
-class DebounceCommand extends Command
+class DebounceConsoleCommand extends Command
 {
     /**
      * The name and signature of the console command.

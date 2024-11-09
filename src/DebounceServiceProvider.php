@@ -3,7 +3,7 @@
 namespace Zackaj\LaravelDebounce;
 
 use Illuminate\Support\ServiceProvider;
-use Zackaj\LaravelDebounce\Commands\DebounceCommand;
+use Zackaj\LaravelDebounce\Commands\DebounceConsoleCommand;
 use Zackaj\LaravelDebounce\Commands\DebounceConsoleMakeCommand;
 use Zackaj\LaravelDebounce\Commands\DebounceJobMakeCommand;
 use Zackaj\LaravelDebounce\Commands\DebounceNotificationMakeCommand;
@@ -21,7 +21,7 @@ class DebounceServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->commands([
-            DebounceCommand::class,
+            DebounceConsoleCommand::class,
             DebounceNotificationMakeCommand::class,
             DebounceJobMakeCommand::class,
             DebounceConsoleMakeCommand::class,
