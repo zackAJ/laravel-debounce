@@ -1,0 +1,47 @@
+<?php
+
+namespace {{ namespace }};
+
+use Carbon\Carbon;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
+use Zackaj\LaravelDebounce\DebounceJob;
+
+class {{ class }} extends DebounceJob implements ShouldQueue
+{
+    use Queueable;
+
+    /**
+     * Create a new job instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
+    {
+        // $this->getReport()->occurrences;
+    }
+
+    public function before(): void
+    {
+        //NOTE: remove the method if not needed
+        //run before handling the job
+    }
+    public function after(): void
+    {
+        //NOTE: remove the method if not needed
+        //run after handling the job
+    }
+
+    public function getLatestActivityTimestamp(): ?Carbon
+    {
+        //NOTE: remove the method if not needed
+        //manually set the latest activity to debounce from
+        return null;
+    }
+}

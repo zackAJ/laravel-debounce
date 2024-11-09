@@ -1,0 +1,51 @@
+<?php
+
+namespace {{ namespace }};
+
+use Carbon\Carbon;
+use Zackaj\LaravelDebounce\DebounceCommand;
+
+class {{ class }} extends DebounceCommand
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = '{{ command }}';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle()
+    {
+        // $this->getReport()->occurrences;
+    }
+
+    public static function before(): void
+    {
+        //NOTE: remove the method if not needed
+        //run before executing the command
+    }
+
+    public static function after(): void
+    {
+        //NOTE: remove the method if not needed
+        //run after executing the command
+    }
+
+    public function getLatestActivityTimestamp(): ?Carbon
+    {
+        //NOTE: remove the method if not needed
+        //manually set the latest activity to debounce from
+
+        return null;
+    }
+}
