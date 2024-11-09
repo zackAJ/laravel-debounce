@@ -57,14 +57,14 @@ class JobDebouncer extends TrackerDebouncer
         return $this->originalDelay;
     }
 
-    public function getLatestActivityTimestamp(): ?Carbon
+    public function getLastActivityTimestamp(): ?Carbon
     {
         if (! $this->isDebounceable($this->queuable)) {
-            return parent::getLatestActivityTimestamp();
+            return parent::getLastActivityTimestamp();
         }
 
         return
-            $this->queuable->getLatestActivityTimestamp() ??
-            parent::getLatestActivityTimestamp();
+            $this->queuable->getLastActivityTimestamp() ??
+            parent::getLastActivityTimestamp();
     }
 }

@@ -12,7 +12,7 @@ abstract class DebounceJob implements DebounceableJob
 {
     use DebounceTrackable;
 
-    public function getLatestActivityTimestamp(): ?Carbon
+    public function getLastActivityTimestamp(): ?Carbon
     {
         return null;
     }

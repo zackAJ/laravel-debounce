@@ -14,7 +14,7 @@ use Zackaj\LaravelDebounce\Trackers\Report;
 
 abstract class DebounceCommand extends Command implements DebounceableCommand
 {
-    public function getLatestActivityTimestamp(): ?Carbon
+    public function getLastActivityTimestamp(): ?Carbon
     {
         return null;
     }

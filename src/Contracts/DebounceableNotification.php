@@ -13,7 +13,7 @@ interface DebounceableNotification extends ShouldQueue
      *
      * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
      */
-    public function getLatestActivityTimestamp(mixed $notifiables): ?Carbon;
+    public function getLastActivityTimestamp(mixed $notifiables): ?Carbon;
 
     public function after($notifiables): void;
 

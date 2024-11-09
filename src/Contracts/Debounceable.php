@@ -24,9 +24,9 @@ interface Debounceable
 
     public function getTimestamp(): ?Carbon;
 
-    public function getLatestActivityTimestamp(): ?Carbon;
+    public function getLastActivityTimestamp(): ?Carbon;
 
-    public function getLatestActivityTimestampFallback(): ?Carbon;
+    public function getLastActivityTimestampFallback(): ?Carbon;
 
     public function getOriginalDelay(): int;
 

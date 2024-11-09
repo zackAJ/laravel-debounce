@@ -68,10 +68,10 @@ class {{ class }} extends DebounceNotification
     /**
      * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
      */
-    public function getLatestActivityTimestamp(mixed $notifiables): ?Carbon
+    public function getLastActivityTimestamp(mixed $notifiables): ?Carbon
     {
         //NOTE: remove the method if not needed
-        //manually set the latest activity to debounce from
+        //manually set the last activity to debounce from
 
         return null;
     }

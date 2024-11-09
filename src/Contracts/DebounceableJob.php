@@ -7,7 +7,7 @@ use Illuminate\Foundation\Bus\PendingDispatch;
 
 interface DebounceableJob
 {
-    public function getLatestActivityTimestamp(): ?Carbon;
+    public function getLastActivityTimestamp(): ?Carbon;
 
     public function after(): void;
 

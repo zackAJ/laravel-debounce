@@ -45,12 +45,12 @@ abstract class TrackerDebouncer extends BaseDebouncer
         }
     }
 
-    public function getLatestActivityTimestamp(): ?Carbon
+    public function getLastActivityTimestamp(): ?Carbon
     {
         return $this->getReport()?->occurrences->last()?->happenedAt;
     }
 
-    public function getLatestActivityTimestampFallback(): ?Carbon
+    public function getLastActivityTimestampFallback(): ?Carbon
     {
         return now()->subSeconds($this->getOriginalDelay());
     }

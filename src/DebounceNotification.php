@@ -20,7 +20,7 @@ abstract class DebounceNotification extends Notification implements Debounceable
     /**
      * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
      */
-    public function getLatestActivityTimestamp(mixed $notifiables): ?Carbon
+    public function getLastActivityTimestamp(mixed $notifiables): ?Carbon
     {
         return null;
     }

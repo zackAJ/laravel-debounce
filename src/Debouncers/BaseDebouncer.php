@@ -17,7 +17,7 @@ abstract class BaseDebouncer implements Debounceable, ShouldBeUniqueUntilProcess
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 
-    protected ?Carbon $latestActivityTimesStamp = null;
+    protected ?Carbon $lastActivityTimesStamp = null;
 
     /**
      * Handle the debouncer logic, main lifecycle
@@ -90,12 +90,12 @@ abstract class BaseDebouncer implements Debounceable, ShouldBeUniqueUntilProcess
         return $defaultDelay;
     }
 
-    //source of truth of the latest activity registered
+    //source of truth of the last activity registered
     final public function getTimestamp(): ?Carbon
     {
-        return $this->latestActivityTimesStamp ??=
-            $this->getLatestActivityTimestamp() ??
-            $this->getLatestActivityTimestampFallback();
+        return $this->lastActivityTimesStamp ??=
+            $this->getLastActivityTimestamp() ??
+            $this->getLastActivityTimestampFallback();
     }
 
     final protected function uniqueKey(): string

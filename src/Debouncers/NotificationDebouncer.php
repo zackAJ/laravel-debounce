@@ -32,15 +32,15 @@ class NotificationDebouncer extends TrackerDebouncer
         }
     }
 
-    public function getLatestActivityTimestamp(): ?Carbon
+    public function getLastActivityTimestamp(): ?Carbon
     {
         if (! $this->isDebounceable($this->notification)) {
-            return parent::getLatestActivityTimestamp();
+            return parent::getLastActivityTimestamp();
         }
 
         return
-            $this->notification->getLatestActivityTimestamp($this->notifiables) ??
-            parent::getLatestActivityTimestamp();
+            $this->notification->getLastActivityTimestamp($this->notifiables) ??
+            parent::getLastActivityTimestamp();
     }
 
     public function uniqueId(): string
