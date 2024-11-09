@@ -1,7 +1,6 @@
 {
     "name": "zackaj/laravel-debounce",
     "description": "Debounce jobs ,notifications and artisan commands.",
-    "type": "Laravel package",
     "license": "MIT",
     "autoload": {
         "psr-4": {
