@@ -2,6 +2,7 @@
 
 namespace Zackaj\LaravelDebounce\Debouncers;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Context;
@@ -64,7 +65,9 @@ class CommandDebouncer extends TrackerDebouncer
 
     private function getCommandFromSignature(): Command
     {
-        return collect(Artisan::all())->where(fn ($cmd, $signature) => $signature === $this->getPureSignature())->firstOrFail();
+        return collect(Artisan::all())
+            ->where(fn ($cmd, $signature) => $signature === $this->getPureSignature())
+            ->firstOrFail();
     }
 
     private function setReportByContext(): void
@@ -83,5 +86,17 @@ class CommandDebouncer extends TrackerDebouncer
     private function getPureSignature(): string
     {
         return explode(' ', $this->command)[0];
+    }
+
+    public function getLastActivityTimestamp(): ?Carbon
+    {
+
+        if (! $this->isDebounceable($this->getCommandFromSignature())) {
+            return parent::getLastActivityTimestamp();
+        }
+
+        return
+            $this->getCommandFromSignature()::getLastActivityTimestamp() ??
+            parent::getLastActivityTimestamp();
     }
 }

@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 interface DebounceableCommand
 {
-    public function getLastActivityTimestamp(): ?Carbon;
+    public static function getLastActivityTimestamp(): ?Carbon;
 
     public static function before(): void;
 
