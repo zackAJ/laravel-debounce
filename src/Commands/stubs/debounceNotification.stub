@@ -56,13 +56,13 @@ class {{ class }} extends DebounceNotification
     public function before($notifiables): void
     {
         //NOTE: remove the method if not needed
-        //run before dispatching the notification
+        //run before sending the notification
     }
 
     public function after($notifiables): void
     {
         //NOTE: remove the method if not needed
-        //run after dispatching the notification
+        //run after sending the notification
     }
 
     /**

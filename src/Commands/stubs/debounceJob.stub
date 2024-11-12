@@ -30,12 +30,12 @@ class {{ class }} extends DebounceJob
     public function before(): void
     {
         //NOTE: remove the method if not needed
-        //run before handling the job
+        //run before dispatching the job
     }
     public function after(): void
     {
         //NOTE: remove the method if not needed
-        //run before handling the job
+        //run after dispatching the job
     }
 
     public function getLastActivityTimestamp(): ?Carbon
