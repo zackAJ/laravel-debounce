@@ -3,7 +3,7 @@
 # Laravel debounce  
 _by zackaj_
 
-Laravel-debounce allows you to accumulate / debounce a job,notification or command to avoid spamming you users and your app's queue.
+Laravel-debounce allows you to accumulate / debounce a job,notification or command to avoid spamming your users and your app's queue.
 
 It also tracks and registers every request occurrence and gives you a nice [report tracking](#report-tracking) with information like `ip address` and `authenticated user` per request.
 
