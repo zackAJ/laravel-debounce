@@ -3,7 +3,7 @@
 # Laravel debounce  
 _by zackaj_
 
-Laravel-debounce allows you to accumulate / debounce a job,notification or command to avoid spamming your users and your app's queue.
+Laravel-debounce allows you to accumulate / debounce a job, notification or command to avoid spamming your users and your app's queue.
 
 It also tracks and registers every request occurrence and gives you a nice [report tracking](#report-tracking) with information like `ip address` and `authenticated user` per request.
 
@@ -37,7 +37,7 @@ It also tracks and registers every request occurrence and gives you a nice [repo
 
 This laravel package uses UniqueJobs (atomic locks) and caching to run only one instance of a task in a debounced interval of x seconds delay.
 
-Everytime a new activity is recoreded (occurrence), the execution is delayed with x seconds.
+Everytime a new activity is recorded (occurrence), the execution is delayed by x seconds.
 
 ### Features
 
@@ -152,7 +152,7 @@ class DemoController extends Controller
 ### Basic usage
 You can debounce existing jobs, notifications and commands with zero setup.
 
-**Warning** you can't access report or track the requests without extending the package's classes, see [Advanced usage](#advanced-usage)
+**Warning** you can't access reports or track the requests without extending the package's classes, see [Advanced usage](#advanced-usage)
 
 ```php
 use Zackaj\LaravelDebounce\Facades\Debounce;
@@ -350,7 +350,7 @@ public function getLastActivityTimestamp(): ?Carbon
 }
 ```
 
-You can override this method in your `debounceables` in order to debounce from a custom timestamp of choice, if null returned the debouncer will fallback to the default implementation above.
+You can override this method in your `debounceables` in order to debounce from a custom timestamp of your choice. If `null` is returned the debouncer will fallback to the default implementation above.
 
 #### Debounce job
 
@@ -403,7 +403,7 @@ class Test extends DebounceCommand
 ```
 
 ## Bonus CLI Debounce
-For fun, you can actually debounce commands from the CLI using `debounce:command` Artisan command.
+For fun, you can actually debounce commands from the CLI using the `debounce:command` Artisan command.
 
 ```php
 php artisan debounce:command 5 uniqueKey app:test
@@ -412,11 +412,11 @@ here's the signature for the command:
 `php artisan debounce:command {delay} {uniqueKey} {signature*}`
 
 ## Debugging And Monitoring
-I recommend using [Laravel telescope](https://laravel.com/docs/11.x/telescope) to see the debouncer live in queues tab and to debug any failures.
+I recommend using [Laravel telescope](https://laravel.com/docs/11.x/telescope) to see the debouncer live in the queues tab and to debug any failures.
 
 ## Known Issues
 
-1- Unique lock gets stuck sometimes when jobs fail [github issue](https://github.com/laravel/framework/issues/37729)
+1. Unique lock gets stuck sometimes when jobs fail [github issue](https://github.com/laravel/framework/issues/37729)
 
 - cause: this happens when deleted models are unserialized causing the job to fail without clearing the lock.
 
