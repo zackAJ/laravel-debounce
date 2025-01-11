@@ -417,10 +417,8 @@ I recommend using [Laravel telescope](https://laravel.com/docs/11.x/telescope) t
 ## Known Issues
 
 1. Unique lock gets stuck sometimes when jobs fail [github issue](https://github.com/laravel/framework/issues/37729)
-
-- cause: this happens when deleted models are unserialized causing the job to fail without clearing the lock.
-
-- solution: If you're using `database` cache driver delete the entry from job_locks table.
+    - cause: this happens when deleted models are unserialized causing the job to fail without clearing the lock.
+    - solution: If you're using `database` cache driver delete the entry from job_locks table.
 
 
 ## Contributing
