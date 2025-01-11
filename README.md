@@ -193,7 +193,7 @@ In order to use:
 - [before/after Hooks](#before-after-hooks)
 - [Debounce from custom timestamp](#override-timestamp)
 
-your existing jobs, notificaitons and commands must extend:
+your existing jobs, notifications and commands must extend:
 
 ```php
 use Zackaj\LaravelDebounce\DebounceJob;
