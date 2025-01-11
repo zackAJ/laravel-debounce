@@ -152,7 +152,7 @@ class DemoController extends Controller
 ### Basic usage
 You can debounce existing jobs, notifications and commands with zero setup.
 
-**Warning** you can't access reports or track the requests without extending the package's classes, see [Advanced usage](#advanced-usage)
+**Warning** you can't access [report tracking](#report-tracking) without extending the package's classes, see [Advanced usage](#advanced-usage).
 
 ```php
 use Zackaj\LaravelDebounce\Facades\Debounce;
