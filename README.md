@@ -416,9 +416,9 @@ I recommend using [Laravel telescope](https://laravel.com/docs/11.x/telescope) t
 
 ## Known Issues
 
-1. Unique lock gets stuck sometimes when jobs fail [github issue](https://github.com/laravel/framework/issues/37729), I made a fix to the laravel core framework about this give it a reaction: [PR](https://github.com/laravel/framework/pull/54000)
+1. Unique lock gets stuck sometimes when jobs fail [github issue](https://github.com/laravel/framework/issues/37729), I made a fix to the laravel core framework about this give it a reaction: [PR (merged)](https://github.com/laravel/framework/pull/54000) 
     - cause: this happens when deleted models are unserialized causing the job to fail without clearing the lock.
-    - solution: don't use `SerializesModels` trait on Notifications/Jobs.
+    - solution: don't use `SerializesModels` trait on Notifications/Jobs. (old temporary solution, now the bug is fixed)
 
 
 ## Contributing
