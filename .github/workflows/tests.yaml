@@ -2,9 +2,9 @@ name: PHP Composer
 
 on:
   push:
-    branches: [ 'dev' ]
+    branches: [ $default-branch ]
   pull_request:
-    branches: [ 'dev' ]
+    branches: [ $default-branch ]
 
 permissions:
   contents: read
@@ -13,6 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
 
     steps:
     - uses: actions/checkout@v4
