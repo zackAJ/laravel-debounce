@@ -8,6 +8,14 @@
             "Zackaj\\LaravelDebounce\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Zackaj\\LaravelDebounce\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
     "authors": [
         {
             "name": "zackaj",
