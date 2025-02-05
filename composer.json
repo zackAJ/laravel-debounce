@@ -34,8 +34,8 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "test-features": "vendor/bin/phpunit tests/features",
-        "test-unit": "vendor/bin/phpunit tests/unit",
+        "test-features": "vendor/bin/phpunit tests/Feature",
+        "test-unit": "vendor/bin/phpunit tests/Unit",
         "phpunit": "vendor/bin/phpunit"
     },
     "require-dev": {

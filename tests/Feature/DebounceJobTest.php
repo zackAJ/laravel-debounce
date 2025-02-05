@@ -39,7 +39,7 @@ class DebounceJobTest extends BaseCase
     {
         $job = new NormalJob;
 
-        (Debounce::job($job, 0, 'key', false))->handle();
+        Debounce::job($job, 0, 'key', false);
 
         $this->assertTrue(NormalJob::$fired);
     }
@@ -48,7 +48,7 @@ class DebounceJobTest extends BaseCase
     {
         $job = new DJob;
 
-        (Debounce::job($job, 0, 'key', false))->handle();
+        Debounce::job($job, 0, 'key', false);
 
         $this->assertTrue(DJob::$fired);
     }

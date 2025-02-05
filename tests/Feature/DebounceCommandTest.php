@@ -26,17 +26,6 @@ class DebounceCommandTest extends BaseCase
         Queue::assertCount(1);
     }
 
-    public function test_normal_command_is_fired()
-    {
-        Queue::fake();
-        $command = new NormalCommand;
-        Artisan::registerCommand($command);
-
-        (Debounce::command('test:test', 0, 'key', ['word' => 'test arg'], false))->handle();
-
-        $this->assertTrue(NormalCommand::$fired);
-    }
-
     public function test_debounce_command_is_debounced()
     {
         Queue::fake();
@@ -49,13 +38,22 @@ class DebounceCommandTest extends BaseCase
         Queue::assertCount(1);
     }
 
+    public function test_normal_command_is_fired()
+    {
+        $command = new NormalCommand;
+        Artisan::registerCommand($command);
+
+        Debounce::command('test:test', 0, 'key', ['word' => 'test arg'], false);
+
+        $this->assertTrue(NormalCommand::$fired);
+    }
+
     public function test_debounce_command_is_fired()
     {
-        Queue::fake();
         $command = new DCommand;
         Artisan::registerCommand($command);
 
-        (Debounce::command('dtest:test', 0, 'key', ['word' => 'test arg'], false))->handle();
+        Debounce::command('dtest:test', 0, 'key', ['word' => 'test arg'], false);
 
         $this->assertTrue(DCommand::$fired);
     }
