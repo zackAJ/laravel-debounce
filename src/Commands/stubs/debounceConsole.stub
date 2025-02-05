@@ -41,7 +41,7 @@ class {{ class }} extends DebounceCommand
         //run after executing the command
     }
 
-    public function getLastActivityTimestamp(): ?Carbon
+    public static function getLastActivityTimestamp(): ?Carbon
     {
         //NOTE: remove the method if not needed
         //manually set the last activity to debounce from
