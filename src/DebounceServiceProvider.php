@@ -31,7 +31,7 @@ class DebounceServiceProvider extends ServiceProvider
 
         $this->app->bind(Report::class, fn () => (new Report(collect([]))));
 
-        //create with default driver config driver
+        // create with default driver config driver
         $this->app->bind(Trackable::class, fn () => TrackerManager::make()->tracker);
     }
 }
