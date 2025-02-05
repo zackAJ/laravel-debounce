@@ -37,9 +37,9 @@ abstract class TrackerDebouncer extends BaseDebouncer
             request()->user(),
         );
 
-        //register if first occurrence ever
-        //if a lock instance already exits
-        //not if self dispatched
+        // register if first occurrence ever
+        // if a lock instance already exits
+        // not if self dispatched
         if ($this->isLocked() || is_null($this->getReport())) {
             $this->registerOccurrence();
         }
@@ -74,7 +74,7 @@ abstract class TrackerDebouncer extends BaseDebouncer
             $this->report;
     }
 
-    //clear timestamp tracker
+    // clear timestamp tracker
     private function forgetReport(): void
     {
         $this->report = $this->tracker->forgetReport($this->uniqueKey());

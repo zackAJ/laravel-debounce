@@ -90,7 +90,7 @@ abstract class BaseDebouncer implements Debounceable, ShouldBeUniqueUntilProcess
         return $defaultDelay;
     }
 
-    //source of truth of the last activity registered
+    // source of truth of the last activity registered
     final public function getTimestamp(): ?Carbon
     {
         return $this->lastActivityTimesStamp ??=
@@ -103,7 +103,7 @@ abstract class BaseDebouncer implements Debounceable, ShouldBeUniqueUntilProcess
         return $this::class.':'.$this->uniqueId();
     }
 
-    //determine if debouncer is locked already, no param is required
+    // determine if debouncer is locked already, no param is required
     final public function isLocked(): bool
     {
         $lock = $this->getLock($this->getLockKey());
@@ -113,18 +113,18 @@ abstract class BaseDebouncer implements Debounceable, ShouldBeUniqueUntilProcess
         return ! $acquired;
     }
 
-    //get the lock key of the debouncer, no param is required
+    // get the lock key of the debouncer, no param is required
     final protected function getLockKey(?string $uniqueKey = null): string
     {
         if (is_null($uniqueKey)) {
             $uniqueKey = $this->uniqueId();
         }
-        $laravelPrefix = 'laravel_unique_job:'.get_class($this).':'; //The Laravel way of doing it
+        $laravelPrefix = 'laravel_unique_job:'.get_class($this).':'; // The Laravel way of doing it
 
         return $laravelPrefix.$uniqueKey;
     }
 
-    //get a lock
+    // get a lock
     final protected function getLock(string $key, int $seconds = 10): Lock
     {
         return Cache::lock($key, $seconds);

@@ -18,7 +18,7 @@ class Occurrence
         public string $ip,
         public array $ips,
         public ?Authenticatable $user = null,
-        private Collection $data = new Collection //not used for now
+        private Collection $data = new Collection // not used for now
     ) {}
 
     public function headers(): HeaderBag
