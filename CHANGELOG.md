@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file, this projec
 
 ### Other Changes
 - Fix: command stub by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/5
-**Full Changelog**: https://github.com/zackAJ/laravel-debounce/compare/v1.0.0...v1.1.0
+**Full Changelog**: https://github.com/zackAJ/laravel-debounce/compare/v1.0.0...v2.0.0
 
 ## v1.0.0 - 2024-11-12
 
