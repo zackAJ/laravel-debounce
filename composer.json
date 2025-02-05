@@ -34,9 +34,8 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "test-features": "vendor/bin/phpunit tests/Feature",
-        "test-unit": "vendor/bin/phpunit tests/Unit",
-        "phpunit": "vendor/bin/phpunit"
+        "test:feature": "vendor/bin/phpunit tests/Feature",
+        "test:unit": "vendor/bin/phpunit tests/Unit"
     },
     "require-dev": {
         "shipmonk/composer-dependency-analyser": "dev-master",
