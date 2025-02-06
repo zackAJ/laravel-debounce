@@ -71,7 +71,7 @@ class DebounceCommandTest extends BaseCase
         ];
 
         foreach ($commands as $key => $cmd) {
-            //for future tests
+            // for future tests
             $args = [
                 'command' => $cmd['signature'],
                 'delay' => 0,
