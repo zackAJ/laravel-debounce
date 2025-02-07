@@ -96,6 +96,19 @@ class DebounceCommandTest extends BaseCase
             $this->assertTrue($cmd['class']::$fired);
         }
     }
+
+    public function test_before_and_after_hooks_are_fired()
+    {
+        $commands = [new DCommandAfter, new DCommandBefore];
+
+        foreach ($commands as $cmd) {
+            Artisan::registerCommand($cmd);
+
+            Debounce::command('dtest:test', 0, 'key', ['word' => 'test arg'], false);
+
+            $this->assertTrue($cmd::$fired);
+        }
+    }
 }
 
 class NormalCommand extends Command
@@ -125,4 +138,36 @@ class DCommand extends DebounceCommand
 
         static::$fired = true;
     }
+}
+
+class DCommandAfter extends DebounceCommand
+{
+    protected $signature = 'dtest:test {word}';
+
+    protected $description = 'test debounce command';
+
+    public static $fired = false;
+
+    public static function after(): void
+    {
+        static::$fired = true;
+    }
+
+    public function handle() {}
+}
+
+class DCommandBefore extends DebounceCommand
+{
+    protected $signature = 'dtest:test {word}';
+
+    protected $description = 'test debounce command';
+
+    public static $fired = false;
+
+    public static function before(): void
+    {
+        static::$fired = true;
+    }
+
+    public function handle() {}
 }
