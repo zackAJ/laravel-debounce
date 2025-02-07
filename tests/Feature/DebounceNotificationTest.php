@@ -2,6 +2,7 @@
 
 namespace Zackaj\LaravelDebounce\Tests\Feature;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\Notification;
@@ -62,6 +63,30 @@ class DebounceNotificationTest extends BaseCase
 
         FacadesNotification::assertCount(1);
     }
+
+    public function test_before_and_after_hooks_are_fired()
+    {
+        FacadesNotification::fake();
+        $notifications = [new DNotificationAfter, new DNotificationBefore];
+        $user = UserFactory::new()->create();
+
+        foreach ($notifications as $notif) {
+            Debounce::notification($user, $notif, 0, 'key', false);
+
+            $this->assertTrue(DNotificationAfter::$fired);
+        }
+    }
+
+    public function test_debounce_notification_latest_activity_is_called()
+    {
+        FacadesNotification::fake();
+        $notif = new DNotificationLatestActivity;
+        $user = UserFactory::new()->create();
+
+        Debounce::notification($user, $notif, 0, 'key', false);
+
+        $this->assertTrue(DNotificationLatestActivity::$delay === 1);
+    }
 }
 
 class NormalNotification extends Notification implements ShouldQueue
@@ -82,5 +107,39 @@ class DNotification extends DebounceNotification implements ShouldQueue
     public function via(): array
     {
         return ['database'];
+    }
+}
+
+class DNotificationAfter extends DNotification
+{
+    public static bool $fired = false;
+
+    public function after($notifiables): void
+    {
+        static::$fired = true;
+    }
+}
+
+class DNotificationBefore extends DNotification
+{
+    public static bool $fired = false;
+
+    public function before($notifiables): void
+    {
+        static::$fired = true;
+    }
+}
+
+class DNotificationLatestActivity extends DNotification
+{
+    public static bool $fired = false;
+
+    public static $delay = 0;
+
+    public function getLastActivityTimestamp(mixed $notifiables): ?Carbon
+    {
+        static::$delay = 1;
+
+        return null;
     }
 }

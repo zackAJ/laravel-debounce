@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Queue;
+use Zackaj\LaravelDebounce\Commands\DebounceConsoleCommand;
 use Zackaj\LaravelDebounce\DebounceCommand;
 use Zackaj\LaravelDebounce\Facades\Debounce;
 use Zackaj\LaravelDebounce\Tests\BaseCase;
@@ -57,6 +58,57 @@ class DebounceCommandTest extends BaseCase
 
         $this->assertTrue(DCommand::$fired);
     }
+
+    public function test_debounce_from_cli_is_debounced_and_fired()
+    {
+        Queue::fake();
+        Artisan::registerCommand(new NormalCommand);
+        Artisan::registerCommand(new DCommand);
+        Artisan::registerCommand(new DebounceConsoleCommand);
+        $commands = [
+            ['signature' => 'test:test', 'class' => NormalCommand::class],
+            ['signature' => 'dtest:test', 'class' => DCommand::class],
+        ];
+
+        foreach ($commands as $key => $cmd) {
+            // for future tests
+            $args = [
+                'command' => $cmd['signature'],
+                'delay' => 0,
+                'uniqueKey' => 'key',
+                'parameters' => [
+                    'word' => 'hello',
+                ],
+            ];
+
+            $commandString = sprintf(
+                'debounce:command %s %s %s %s',
+                $args['delay'],
+                $args['uniqueKey'],
+                $args['command'],
+                $args['parameters']['word'],
+            );
+
+            $this->artisan($commandString)->assertSuccessful();
+            $this->artisan($commandString)->assertSuccessful();
+            Queue::assertCount($key + 1);
+
+            $this->assertTrue($cmd['class']::$fired);
+        }
+    }
+
+    public function test_before_and_after_hooks_are_fired()
+    {
+        $commands = [new DCommandAfter, new DCommandBefore];
+
+        foreach ($commands as $cmd) {
+            Artisan::registerCommand($cmd);
+
+            Debounce::command('dtest:test', 0, 'key', ['word' => 'test arg'], false);
+
+            $this->assertTrue($cmd::$fired);
+        }
+    }
 }
 
 class NormalCommand extends Command
@@ -86,4 +138,36 @@ class DCommand extends DebounceCommand
 
         static::$fired = true;
     }
+}
+
+class DCommandAfter extends DebounceCommand
+{
+    protected $signature = 'dtest:test {word}';
+
+    protected $description = 'test debounce command';
+
+    public static $fired = false;
+
+    public static function after(): void
+    {
+        static::$fired = true;
+    }
+
+    public function handle() {}
+}
+
+class DCommandBefore extends DebounceCommand
+{
+    protected $signature = 'dtest:test {word}';
+
+    protected $description = 'test debounce command';
+
+    public static $fired = false;
+
+    public static function before(): void
+    {
+        static::$fired = true;
+    }
+
+    public function handle() {}
 }

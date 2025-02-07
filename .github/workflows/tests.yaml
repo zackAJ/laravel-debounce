@@ -1,10 +1,13 @@
-name: PHP Composer
+name: Run tests
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches:
+      - main
   pull_request:
-    branches: [ $default-branch ]
+    branches:
+      - main
+      - dev
 
 permissions:
   contents: read

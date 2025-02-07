@@ -52,6 +52,17 @@ class DebounceJobTest extends BaseCase
 
         $this->assertTrue(DJob::$fired);
     }
+
+    public function test_before_and_after_hooks_are_fired()
+    {
+        $jobs = [new DJobAfter, new DJobBefore];
+
+        foreach ($jobs as $job) {
+            Debounce::job($job, 0, 'key', false);
+
+            $this->assertTrue($job::$fired);
+        }
+    }
 }
 
 class NormalJob implements ShouldQueue
@@ -69,6 +80,30 @@ class DJob extends DebounceJob
     public static bool $fired = false;
 
     public function handle(): void
+    {
+        static::$fired = true;
+    }
+}
+
+class DJobAfter extends DebounceJob
+{
+    public static bool $fired = false;
+
+    public function handle(): void {}
+
+    public function after(): void
+    {
+        static::$fired = true;
+    }
+}
+
+class DJobBefore extends DebounceJob
+{
+    public static bool $fired = false;
+
+    public function handle(): void {}
+
+    public function before(): void
     {
         static::$fired = true;
     }
