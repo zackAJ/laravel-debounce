@@ -137,7 +137,7 @@ class DemoController extends Controller
 ## Installation
 
 ### Prerequisites
-- Laravel application (11.x , 10.x should be fine)
+- Laravel application (> 10.x)
 - Up and running cache system that supports [atomic locks](https://laravel.com/docs/11.x/cache#atomic-locks)
 - Up and running [queue worker](https://laravel.com/docs/11.x/queues)
 
