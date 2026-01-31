@@ -24,7 +24,7 @@ class JobDebouncer extends TrackerDebouncer
     {
         if ($this->isDebounceable($this->queuable)) {
             $report = $this->getReport();
-            if ($report !== null) {
+            if (! is_null($report)) {
                 $this->queuable->setReport($report);
             }
         }
