@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file, this project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## v2.0.5 - 2026-02-01
+- Fix null safety by @TonsiTT & @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/12
+
 ## v2.0.0 - 2025-02-05
 
 ### BREAKING CHANGES
