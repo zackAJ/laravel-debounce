@@ -23,7 +23,10 @@ class JobDebouncer extends TrackerDebouncer
     public function execute(): void
     {
         if ($this->isDebounceable($this->queuable)) {
-            $this->queuable->setReport($this->getReport());
+            $report = $this->getReport();
+            if (! is_null($report)) {
+                $this->queuable->setReport($report);
+            }
         }
 
         if ($this->sync) {

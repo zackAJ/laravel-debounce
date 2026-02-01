@@ -8,12 +8,12 @@ trait DebounceTrackable
 {
     protected ?Report $report = null;
 
-    public function getReport(): Report
+    public function getReport(): ?Report
     {
         return $this->report;
     }
 
-    public function setReport(Report $report): Report
+    public function setReport(?Report $report): ?Report
     {
         return $this->report = $report;
     }

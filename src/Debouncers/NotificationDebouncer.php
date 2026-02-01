@@ -22,7 +22,11 @@ class NotificationDebouncer extends TrackerDebouncer
     public function execute(): void
     {
         if ($this->isDebounceable($this->notification)) {
-            $this->notification->setReport($this->getReport());
+            $report = $this->getReport();
+
+            if (! is_null($report)) {
+                $this->notification->setReport($report);
+            }
         }
 
         if ($this->sendNow) {
