@@ -4,16 +4,18 @@ namespace Zackaj\LaravelDebounce;
 
 use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\OutputInterface;
 use Zackaj\LaravelDebounce\Debouncers\CommandDebouncer;
 use Zackaj\LaravelDebounce\Debouncers\JobDebouncer;
 use Zackaj\LaravelDebounce\Debouncers\NotificationDebouncer;
+use Zackaj\LaravelDebounce\Jobs\DebounceJob;
 
 class Debouncer
 {
     /**
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param  Collection|array|mixed  $notifiables
      */
     public function notification(mixed $notifiables, Notification|DebounceNotification $notification, int $delay, string $uniqueKey, bool $sendNow = false): PendingDispatch
     {
@@ -23,7 +25,7 @@ class Debouncer
     }
 
     /**
-     * @param  \Zackaj\LaravelDebounce\Jobs\DebounceJob|mixin  $job
+     * @param  DebounceJob|mixin  $job
      */
     public function job($job, int $delay, string $uniqueKey, bool $sync = false): PendingDispatch
     {
