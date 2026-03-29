@@ -137,6 +137,7 @@ class DemoController extends Controller
 ## Installation
 
 ### Prerequisites
+- PHP >= 8.1
 - Laravel application (> 10.x)
 - Up and running cache system that supports [atomic locks](https://laravel.com/docs/11.x/cache#atomic-locks)
 - Up and running [queue worker](https://laravel.com/docs/11.x/queues)
