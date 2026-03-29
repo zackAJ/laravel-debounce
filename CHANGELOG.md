@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file, this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.0.0 - 2026-02-01
+- Add support for Laravel 13 by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/15
+
+**Full Changelog**: https://github.com/zackAJ/laravel-debounce/compare/v2.0.5...v3.0.0
 
 ## v2.0.5 - 2026-02-01
 - Fix null safety by @TonsiTT & @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/12

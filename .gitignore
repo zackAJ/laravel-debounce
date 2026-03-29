@@ -2,3 +2,4 @@
 .env
 /workbench
 .phpunit.cache
+composer.lock
