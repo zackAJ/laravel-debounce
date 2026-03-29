@@ -18,6 +18,10 @@ class CommandDebouncer extends TrackerDebouncer
         public bool $toQueue = false,
         public ?OutputInterface $outputBuffer = null
     ) {
+        if (! class_exists(Context::class)) {
+            throw new \Exception('CommandDebouncer requires Laravel version >= 11');
+        }
+
         parent::__construct($delay);
     }
 
@@ -72,12 +76,12 @@ class CommandDebouncer extends TrackerDebouncer
 
     private function setReportByContext(): void
     {
-        Context::addHidden('report', $this->report);
+        Context::class::addHidden('report', $this->report);
     }
 
     private function forgetReport(): void
     {
-        Context::forgetHidden('report');
+        Context::class::forgetHidden('report');
     }
 
     /**
