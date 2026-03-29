@@ -140,8 +140,11 @@ class DebounceCommandTest extends BaseCase
             $this->markTestSkipped('Command debouncer works for laravel version >= 11');
         }
 
+        Artisan::registerCommand(new NormalCommand);
+
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('CommandDebouncer requires Laravel version >= 11');
+
         Debounce::command('test:test', 5, 'key', ['word' => 'test arg'], false);
     }
 }
