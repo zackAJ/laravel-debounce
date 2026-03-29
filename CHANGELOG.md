@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file, this projec
 
 ## v3.0.1 - 2026-03-30
 
-### ## ✨ Features
+### ✨ Features
 * feat add a config kill-switch by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/18
 
 **Full Changelog**: https://github.com/zackAJ/laravel-debounce/compare/v3.0.0...v3.0.1
