@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file, this projec
 
 ## v3.0.0 - 2026-02-01
 - Add support for Laravel 13 by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/15
-- Remove artisan command debounce from laravel version 10 by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/15
+- Remove artisan command debounce from laravel version 10 by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/17
 
 **Full Changelog**: https://github.com/zackAJ/laravel-debounce/compare/v2.0.5...v3.0.0
 
