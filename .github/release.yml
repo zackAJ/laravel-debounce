@@ -2,17 +2,25 @@ changelog:
   exclude:
     labels:
       - ignore-for-release
-    authors:
-      - octocat
   categories:
-    - title: Breaking Changes 🛠
+    - title: "## ⚠️ Breaking Changes"
       labels:
-        - Semver-Major
         - breaking-change
-    - title: Exciting New Features 🎉
+    - title: "## ✨ Features"
       labels:
-        - Semver-Minor
-        - enhancement
-    - title: Other Changes
+        - feat
+        - feature
+    - title: "## 🐛 Bug Fixes"
+      labels:
+        - fix
+        - bug
+        - hotfix
+    - title: "## 🔧 Other"
+      labels:
+        - chore
+        - refactor
+        - dep
+        - ci
+    - title: "## 📦 Uncategorized"
       labels:
         - "*"
