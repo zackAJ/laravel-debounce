@@ -30,6 +30,7 @@ It also tracks and registers every request occurrence and gives you a nice [repo
 
 - [Bonus CLI Debounce](#bonus-cli-debounce)
 - [Debugging And Monitoring](#debugging-and-monitoring)
+- [Testing](#testing)
 - [Known Issues](#known-issues)
 - [Contributing](#contributing)
 - [License](#license)
@@ -446,9 +447,29 @@ here's the signature for the command:
 ## Debugging And Monitoring
 I recommend using [Laravel telescope](https://laravel.com/docs/11.x/telescope) to see the debouncer live in the queues tab and to debug any failures.
 
+## Testing
+
+When running tests, you may want to disable debouncing so jobs, notifications and commands are fired immediately without any debounce logic.
+
+Add this to your `phpunit.xml` or `.env.testing`:
+```env
+LARAVEL_DEBOUNCE_ENABLED=false
+```
+
+Or disable it per test:
+```php
+public function test_something()
+{
+    config(['debounce.enabled' => false]);
+
+    // debouncing is bypassed, everything fires immediately
+}
+```
+
 ## Known Issues
 
 1- If you clear / flush the cache, the report tracking and the registered dispatches will be lost.
+
 2- Debouncing artisan commands requires laravel version >=11
 
 
