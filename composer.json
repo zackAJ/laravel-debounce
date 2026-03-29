@@ -39,7 +39,7 @@
     },
     "require-dev": {
         "shipmonk/composer-dependency-analyser": "dev-master",
-        "orchestra/testbench": "9.x-dev|^11.0"
+        "orchestra/testbench": "^8.0"
     },
     "require": {
         "php": "^8.1",
