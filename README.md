@@ -17,6 +17,7 @@ It also tracks and registers every request occurrence and gives you a nice [repo
 - [Installation](#installation)
   - [Prerequisites](#prerequisites)
   - [Composer](#composer)
+  - [Configuration](#configuration)
 
 - [Usage](#usage)
   - [Basic usage](#basic-usage)
@@ -140,7 +141,7 @@ class DemoController extends Controller
 
 ### Prerequisites
 - PHP >= 8.1
-- Laravel application (> 10.x)
+- Laravel application (>= 10.x)
 - Up and running cache system that supports [atomic locks](https://laravel.com/docs/11.x/cache#atomic-locks)
 - Up and running [queue worker](https://laravel.com/docs/11.x/queues)
 
@@ -150,12 +151,40 @@ class DemoController extends Controller
   composer require zackaj/laravel-debounce
 ```
 
+### Configuration
+
+Optionally publish the config file:
+```bash
+php artisan vendor:publish --tag=laravel-debounce-config
+```
+
+This will publish `config/debounce.php`:
+```php
+return [
+    /*
+     * When set to false, debouncing is bypassed entirely and jobs, notifications
+     * and commands are fired immediately as if debounce was never called.
+     */
+    'enabled' => env('LARAVEL_DEBOUNCE_ENABLED', true),
+
+    'driver' => 'cache', // the only supported driver for now
+];
+```
+
+You can also toggle debouncing via your `.env` file:
+```env
+LARAVEL_DEBOUNCE_ENABLED=false
+```
+
+This is useful for local development or testing environments where you want to disable debouncing without changing any code.
+
 ## Usage
 
 ### Basic usage
 You can debounce existing jobs, notifications and commands with zero setup.
 
-**Warning** you can't access [report tracking](#report-tracking) without extending the package's classes, see [Advanced usage](#advanced-usage).
+> [!NOTE]
+> you can't access [report tracking](#report-tracking) without extending the package's classes, see [Advanced usage](#advanced-usage).
 
 ```php
 use Zackaj\LaravelDebounce\Facades\Debounce;
@@ -180,7 +209,7 @@ Debounce::notification(
 
 //command
 Debounce::command(
-    command: new Command(),//replace
+    command: 'app:command',//replace
     delay: 5,
     uniqueKey: $request->ip(),
     parameters: ['name' => 'zackaj'],//see Artisan::call() signature
@@ -408,7 +437,7 @@ class Test extends DebounceCommand
 ## Bonus CLI Debounce ( Laravel version >= 11.0.0 )
 For fun, you can actually debounce commands from the CLI using the `debounce:command` Artisan command.
 
-```php
+```bash
 php artisan debounce:command 5 uniqueKey app:test
 ```
 here's the signature for the command:
@@ -419,8 +448,8 @@ I recommend using [Laravel telescope](https://laravel.com/docs/11.x/telescope) t
 
 ## Known Issues
 
-> [!NOTE]
-> If you clear / flush the cache, the report tracking and the registered dispatches will be lost.
+1- If you clear / flush the cache, the report tracking and the registered dispatches will be lost.
+2- Debouncing artisan commands requires laravel version >=11
 
 
 ## Contributing
