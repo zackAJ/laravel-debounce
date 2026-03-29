@@ -45,6 +45,8 @@ Everytime a new activity is recorded (occurrence), the execution is delayed by x
 - [Report Tracking](#report-tracking)
 - [Bonus CLI Debounce](#bonus-cli-debounce)
 
+> [!WARNING]
+> Debouncing artisan commands requires laravel version >=11
 
 ### Demo
 
@@ -402,7 +404,7 @@ class Test extends DebounceCommand
 
 ```
 
-## Bonus CLI Debounce
+## Bonus CLI Debounce ( Laravel version >= 11.0.0 )
 For fun, you can actually debounce commands from the CLI using the `debounce:command` Artisan command.
 
 ```php
