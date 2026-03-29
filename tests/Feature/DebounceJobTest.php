@@ -63,6 +63,38 @@ class DebounceJobTest extends BaseCase
             $this->assertTrue($job::$fired);
         }
     }
+
+    public function test_job_is_not_debounced_when_disabled()
+    {
+        config(['debounce.enabled' => false]);
+        Queue::fake();
+        $job = new NormalJob;
+
+        Debounce::job($job, 5, 'key', false);
+        Debounce::job($job, 5, 'key', false);
+
+        Queue::assertCount(2);
+    }
+
+    public function test_job_is_fired_when_disabled()
+    {
+        config(['debounce.enabled' => false]);
+        $job = new NormalJob;
+
+        Debounce::job($job, 5, 'key', false);
+
+        $this->assertTrue(NormalJob::$fired);
+    }
+
+    public function test_job_is_fired_sync_when_disabled()
+    {
+        config(['debounce.enabled' => false]);
+        $job = new NormalJob;
+
+        Debounce::job($job, 5, 'key', true);
+
+        $this->assertTrue(NormalJob::$fired);
+    }
 }
 
 class NormalJob implements ShouldQueue

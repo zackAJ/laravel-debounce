@@ -147,6 +147,36 @@ class DebounceCommandTest extends BaseCase
 
         Debounce::command('test:test', 5, 'key', ['word' => 'test arg'], false);
     }
+
+    public function test_command_is_not_debounced_when_disabled()
+    {
+        if (version_compare(app()->version(), '11.0.0', '<')) {
+            $this->markTestSkipped('Command debouncer is not supported for laravel version < 11');
+        }
+
+        config(['debounce.enabled' => false]);
+        Queue::fake();
+        Artisan::registerCommand(new NormalCommand);
+
+        Debounce::command('test:test', 5, 'key', ['word' => 'test arg'], true);
+        Debounce::command('test:test', 5, 'key', ['word' => 'test arg'], true);
+
+        Queue::assertCount(2);
+    }
+
+    public function test_command_is_fired_when_disabled()
+    {
+        if (version_compare(app()->version(), '11.0.0', '<')) {
+            $this->markTestSkipped('Command debouncer is not supported for laravel version < 11');
+        }
+
+        config(['debounce.enabled' => false]);
+        Artisan::registerCommand(new NormalCommand);
+
+        Debounce::command('test:test', 5, 'key', ['word' => 'test arg'], false);
+
+        $this->assertTrue(NormalCommand::$fired);
+    }
 }
 
 class NormalCommand extends Command
