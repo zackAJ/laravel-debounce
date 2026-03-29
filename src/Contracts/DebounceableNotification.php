@@ -5,13 +5,14 @@ namespace Zackaj\LaravelDebounce\Contracts;
 use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\PendingDispatch;
+use Illuminate\Support\Collection;
 
 interface DebounceableNotification extends ShouldQueue
 {
     /**
      * the timestamp that should be compared to the debounce interval
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param  Collection|array|mixed  $notifiables
      */
     public function getLastActivityTimestamp(mixed $notifiables): ?Carbon;
 

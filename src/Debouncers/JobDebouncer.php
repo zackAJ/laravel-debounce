@@ -3,13 +3,14 @@
 namespace Zackaj\LaravelDebounce\Debouncers;
 
 use Carbon\Carbon;
+use Zackaj\LaravelDebounce\Jobs\DebounceJob;
 
 class JobDebouncer extends TrackerDebouncer
 {
     /**
      * NOTE: $job variable already exists that's why I named it $queuable
      *
-     * @param  \Zackaj\LaravelDebounce\Jobs\DebounceJob|mixin  $queuable
+     * @param  DebounceJob|mixin  $queuable
      */
     public function __construct(
         public $queuable,

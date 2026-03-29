@@ -5,6 +5,7 @@ namespace Zackaj\LaravelDebounce;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Collection;
 use Zackaj\LaravelDebounce\Concerns\DebounceTrackable;
 use Zackaj\LaravelDebounce\Contracts\DebounceableNotification;
 use Zackaj\LaravelDebounce\Facades\Debounce;
@@ -18,7 +19,7 @@ abstract class DebounceNotification extends Notification implements Debounceable
     public function after($notifiables): void {}
 
     /**
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param  Collection|array|mixed  $notifiables
      */
     public function getLastActivityTimestamp(mixed $notifiables): ?Carbon
     {
@@ -26,7 +27,7 @@ abstract class DebounceNotification extends Notification implements Debounceable
     }
 
     /**
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param  Collection|array|mixed  $notifiables
      */
     public function debounce(mixed $notifiables, int $delay, string $uniqueKey, bool $sendNow = false): PendingDispatch
     {
