@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file, this project adheres to [Semantic Versioning](http://semver.org/).
 
-## v3.0.0 - 2026-02-01
+## v3.0.1 - 2026-03-30
+
+### ## ✨ Features
+* feat add a config kill-switch by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/18
+
+**Full Changelog**: https://github.com/zackAJ/laravel-debounce/compare/v3.0.0...v3.0.1
+
+## v3.0.0 - 2026-03-30
 - Add support for Laravel 13 by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/15
 - Remove artisan command debounce from laravel version 10 by @zackAJ in https://github.com/zackAJ/laravel-debounce/pull/17
 
