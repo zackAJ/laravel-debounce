@@ -21,9 +21,11 @@ class Debouncer
     public function notification(mixed $notifiables, Notification|DebounceNotification $notification, int $delay, string $uniqueKey, bool $sendNow = false): ?PendingDispatch
     {
         if (config('debounce.enabled') === false) {
-            return $sendNow ?
-                FacadesNotification::sendNow($notifiables, $notification) :
-                FacadesNotification::send($notifiables, $notification);
+            $sendNow ?
+               FacadesNotification::sendNow($notifiables, $notification) :
+               FacadesNotification::send($notifiables, $notification);
+
+            return null;
         }
 
         $uniqueKey = $notification::class.'-'.$uniqueKey;
@@ -34,10 +36,12 @@ class Debouncer
     /**
      * @param  DebounceJob|mixin  $job
      */
-    public function job($job, int $delay, string $uniqueKey, bool $sync = false): PendingDispatch
+    public function job($job, int $delay, string $uniqueKey, bool $sync = false): ?PendingDispatch
     {
         if (config('debounce.enabled') === false) {
-            return $sync ? dispatch_sync($job) : dispatch($job);
+            $sync ? dispatch_sync($job) : dispatch($job);
+
+            return null;
         }
 
         $uniqueKey = $job::class.'-'.$uniqueKey;
