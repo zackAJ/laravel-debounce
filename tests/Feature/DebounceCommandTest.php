@@ -17,6 +17,10 @@ class DebounceCommandTest extends BaseCase
 
     public function test_normal_command_is_debounced()
     {
+        if (version_compare(app()->version(), '11.0.0', '<')) {
+            $this->markTestSkipped('Command debouncer is not supported for laravel version < 11');
+        }
+
         Queue::fake();
         $command = new NormalCommand;
         Artisan::registerCommand($command);
@@ -29,6 +33,10 @@ class DebounceCommandTest extends BaseCase
 
     public function test_debounce_command_is_debounced()
     {
+        if (version_compare(app()->version(), '11.0.0', '<')) {
+            $this->markTestSkipped('Command debouncer is not supported for laravel version < 11');
+        }
+
         Queue::fake();
         $command = new DCommand;
         Artisan::registerCommand($command);
@@ -41,6 +49,10 @@ class DebounceCommandTest extends BaseCase
 
     public function test_normal_command_is_fired()
     {
+        if (version_compare(app()->version(), '11.0.0', '<')) {
+            $this->markTestSkipped('Command debouncer is not supported for laravel version < 11');
+        }
+
         $command = new NormalCommand;
         Artisan::registerCommand($command);
 
@@ -51,6 +63,10 @@ class DebounceCommandTest extends BaseCase
 
     public function test_debounce_command_is_fired()
     {
+        if (version_compare(app()->version(), '11.0.0', '<')) {
+            $this->markTestSkipped('Command debouncer is not supported for laravel version < 11');
+        }
+
         $command = new DCommand;
         Artisan::registerCommand($command);
 
@@ -61,6 +77,10 @@ class DebounceCommandTest extends BaseCase
 
     public function test_debounce_from_cli_is_debounced_and_fired()
     {
+        if (version_compare(app()->version(), '11.0.0', '<')) {
+            $this->markTestSkipped('Command debouncer is not supported for laravel version < 11');
+        }
+
         Queue::fake();
         Artisan::registerCommand(new NormalCommand);
         Artisan::registerCommand(new DCommand);
@@ -99,6 +119,10 @@ class DebounceCommandTest extends BaseCase
 
     public function test_before_and_after_hooks_are_fired()
     {
+        if (version_compare(app()->version(), '11.0.0', '<')) {
+            $this->markTestSkipped('Command debouncer is not supported for laravel version < 11');
+        }
+
         $commands = [new DCommandAfter, new DCommandBefore];
 
         foreach ($commands as $cmd) {
@@ -108,6 +132,20 @@ class DebounceCommandTest extends BaseCase
 
             $this->assertTrue($cmd::$fired);
         }
+    }
+
+    public function test_command_debouncer_throws_error_for_laravel_version_under_10(): void
+    {
+        if (version_compare(app()->version(), '11.0.0', '>=')) {
+            $this->markTestSkipped('Command debouncer works for laravel version >= 11');
+        }
+
+        Artisan::registerCommand(new NormalCommand);
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('CommandDebouncer requires Laravel version >= 11');
+
+        Debounce::command('test:test', 5, 'key', ['word' => 'test arg'], false);
     }
 }
 
