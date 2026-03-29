@@ -3,24 +3,24 @@ changelog:
     labels:
       - ignore-for-release
   categories:
-    - title: "## ⚠️ Breaking Changes"
+    - title: "⚠️ Breaking Changes"
       labels:
         - breaking-change
-    - title: "## ✨ Features"
+    - title: "✨ Features"
       labels:
         - feat
         - feature
-    - title: "## 🐛 Bug Fixes"
+    - title: "🐛 Bug Fixes"
       labels:
         - fix
         - bug
         - hotfix
-    - title: "## 🔧 Other"
+    - title: "🔧 Other"
       labels:
         - chore
         - refactor
         - dep
         - ci
-    - title: "## 📦 Uncategorized"
+    - title: "📦 Uncategorized"
       labels:
         - "*"
