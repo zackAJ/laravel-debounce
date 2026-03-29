@@ -87,6 +87,31 @@ class DebounceNotificationTest extends BaseCase
 
         $this->assertTrue(DNotificationLatestActivity::$delay === 1);
     }
+
+    public function test_notification_is_not_debounced_when_disabled()
+    {
+        config(['debounce.enabled' => false]);
+        FacadesNotification::fake();
+        $notif = new NormalNotification;
+        $user = UserFactory::new()->create();
+
+        Debounce::notification($user, $notif, 5, 'key', false);
+        Debounce::notification($user, $notif, 5, 'key', false);
+
+        FacadesNotification::assertCount(2);
+    }
+
+    public function test_notification_is_fired_when_disabled()
+    {
+        config(['debounce.enabled' => false]);
+        FacadesNotification::fake();
+        $notif = new NormalNotification;
+        $user = UserFactory::new()->create();
+
+        Debounce::notification($user, $notif, 5, 'key', true);
+
+        FacadesNotification::assertCount(1);
+    }
 }
 
 class NormalNotification extends Notification implements ShouldQueue

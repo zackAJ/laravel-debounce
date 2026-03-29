@@ -16,6 +16,10 @@ class DebounceServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/config/debounce.php', 'debounce');
+
+        $this->publishes([
+            __DIR__.'/config/debounce.php' => config_path('debounce.php'),
+        ], 'laravel-debounce-config');
     }
 
     public function boot()
